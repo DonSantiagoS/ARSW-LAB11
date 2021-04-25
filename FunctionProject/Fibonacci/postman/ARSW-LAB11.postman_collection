@@ -1,0 +1,45 @@
+{
+	"info": {
+		"_postman_id": "9f077bb0-949a-47ae-886d-e10ccdf05a87",
+		"name": "ARSW-LAB11",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "POST FIBONACCI",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nth\": 10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{URLAZURE}}/api/Fibonacci",
+					"protocol": "https",
+					"host": [
+						"{{URLAZURE}}"
+					],
+					"path": [
+						"api",
+						"Fibonacci"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"id": "80aa0fd8-0ee3-49f9-89e0-3b1f4afec24f",
+			"key": "azureURL",
+			"value": "functionprojectfibonaccisantiago.azurewebsites.net"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

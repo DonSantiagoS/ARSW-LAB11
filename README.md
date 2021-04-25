@@ -17,6 +17,10 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
 
 1. Cree una Function App tal cual como se muestra en las  imagenes.
 
+![](images/solucion/createFunctionApp1.PNG)
+
+![](images/solucion/createFunctionApp2.PNG)
+
 ![](images/part3/part3-function-config.png)
 
 ![](images/part3/part3-function-configii.png)
