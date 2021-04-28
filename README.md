@@ -189,14 +189,13 @@ Las facturas de Azure Functions se basan en el consumo de recursos y las ejecuci
 
 * Informe
 
-Primeramente se realizo una prueba con el siguiente comando para poder verificar el funcionamiento correcto:
-
+Primeramente se realizo una prueba con el siguiente comando para poder verificar el funcionamiento correcto, despues de haber realizado la respectiva modificiacion de la coleccion POSTMAN para realizar 10 solicitudes:
 
 ````
 newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALANCING_AZURE].postman_environment.json -n 10 &
 ````
 
-Obteniendo como resultado lo siguiente:
+Obteniendo como resultado lo siguiente bajo el analisis de **Azure** :
 
 ![](images/solucion/pruebaPostman1.PNG)
 
@@ -211,7 +210,7 @@ Obteniendo como resultado lo siguiente:
 ![](images/solucion/grafica4Postman1.PNG)
 
 
-Posteriormente se realizo la prueba con este comando anterior pero 10 veces utilizando claro esta **Newman** y la adicion **&** para encadenar las 10 solicitudes , los resultados obtenidos se muestran el la seccion del *informe*
+Posteriormente se realizo la prueba con este comando anterior pero 10 veces utilizando claro esta **Newman** y la adicion **&** para encadenar las 10 solicitudes
 
 ````
 newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALANCING_AZURE].postman_environment.json -n 10 &
@@ -226,6 +225,10 @@ newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALAN
 newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALANCING_AZURE].postman_environment.json -n 10 
 ````
 
+Una vez realizado esto se tuvo como resultado que las 10 solicitudes no se realizaron en el primer intento, ya que en la sexta (6) se detuvo y no cargo mas, por lo que se realizo un segundo intento en el que si fue posible que se realizaran las 10 solicitudes obteniendo como resultado lo siguiente: 
+
+**Nota:** Estas solicitudes tomaron un tiempo considerable
+
 ![](images/solucion/grafica1Postman2.PNG)
 ![](images/solucion/grafica2Postman2.PNG)
 ![](images/solucion/grafica3Postman2.PNG)
@@ -234,15 +237,62 @@ newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALAN
 ![](images/solucion/grafica6Postman2.PNG)
 ![](images/solucion/grafica7Postman2.PNG)
 
+### Conclusiones punto 5:
+
++ El 100% de las solicitudes fue posible en el segundo intento que tuvieran exito
++ El consumo de CPU durante el procesamiento de las solicitudes se sostuvo bastante alto, por lo cual en esta parte no cumplia con lo propuesto por el enunciado del laboratorio
++ Apesar de que la implementacion de Fibonacci App es ineficiente en recursos y tiempo, cuando se despliega en un modelo Serverless se obtiene un resultado de exito en el 100% de los casos, lo que no sucedia en el Laboratorio anterior, lo cual demuestra la efectividad del servicio de **Azure Functions**
+
+Posteriormente se realizo la modificacion solicitada en el punto 6 donde se realizo la modificacion de *index.js* dandole un enfoque recursivo con memorizacion, se realizaron pruebas varias veces obteniendo el siguiente resultado:
+
+**Nota:** En todas las graficas es posible apreciar la diferencia entre el comportamiento obtenido en el punto 5 y el comportamiento obtenido en el punto 6, ya que se ve el movimiento de las graficas, sin embargo cabe aclarar que el punto registrado en cada una de las graficas corresponde al desarrollo con la modificacion recursiva
+
+Se realizo primera mente la prueba con el siguiente comando
+
+````
+newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALANCING_AZURE].postman_environment.json -n 10 &
+````
+
+![](images/solucion/10graficas.PNG)
+
+Es posible observar que se ejecutaron **100 Solicitudes**
+Obteniendo los siguiente resultados:
 
 ![](images/solucion/grafica1Postman3.PNG)
-![](images/solucion/grafica2Postman3.PNG)
 ![](images/solucion/grafica3Postman3.PNG)
 ![](images/solucion/grafica4Postman3.PNG)
 ![](images/solucion/grafica5Postman3.PNG)
 ![](images/solucion/grafica6Postman3.PNG)
 ![](images/solucion/grafica7Postman3.PNG)
 ![](images/solucion/grafica8Postman3.PNG)
+
+y posteriormente se generar 100 solicitudes con el siguiente comando:
+
+````
+newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALANCING_AZURE].postman_environment.json -n 10 &
+newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALANCING_AZURE].postman_environment.json -n 10 &
+newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALANCING_AZURE].postman_environment.json -n 10 &
+newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALANCING_AZURE].postman_environment.json -n 10 &
+newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALANCING_AZURE].postman_environment.json -n 10 &
+newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALANCING_AZURE].postman_environment.json -n 10 &
+newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALANCING_AZURE].postman_environment.json -n 10 &
+newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALANCING_AZURE].postman_environment.json -n 10 &
+newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALANCING_AZURE].postman_environment.json -n 10 &
+newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALANCING_AZURE].postman_environment.json -n 10 
+````
+
+![](images/solucion/100graficas.PNG)
+
+Es posible observar que se ejecutaron **100 Solicitudes**
+Obteniendo los siguiente resultados:
+
+![](images/solucion/grafica19Postman3.PNG)
+![](images/solucion/grafica20Postman3.PNG)
+![](images/solucion/grafica21Postman3.PNG)
+![](images/solucion/grafica22Postman3.PNG)
+
+Despues de observar el respectivo analisis generado en las graficas de Azure, ahora se observaran las respectivas salidas obtenidas en las tablas generadas al utilizar newman con la coleccion postman propuesta
+
 ![](images/solucion/grafica9Postman3.PNG)
 ![](images/solucion/grafica10Postman3.PNG)
 ![](images/solucion/grafica11Postman3.PNG)
@@ -253,27 +303,13 @@ newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALAN
 ![](images/solucion/grafica16Postman3.PNG)
 ![](images/solucion/grafica17Postman3.PNG)
 ![](images/solucion/grafica18Postman3.PNG)
-![](images/solucion/grafica19Postman3.PNG)
-![](images/solucion/grafica20Postman3.PNG)
-![](images/solucion/grafica21Postman3.PNG)
-![](images/solucion/grafica22Postman3.PNG)
 
+Finalmente es posible obsvervar como resultan las graficas despues de cada uno de los ejercicios realizados:
 
-
-![](images/solucion/graficaultima1.PNG)
-![](images/solucion/graficaultima2.PNG)
-![](images/solucion/graficaultima3.PNG)
-![](images/solucion/graficaultima4.PNG)
-![](images/solucion/graficaultima5.PNG)
-![](images/solucion/graficaultima6.PNG)
-
-![](images/solucion/100graficas.PNG)
-
-![](images/solucion/10graficas.PNG)
-
-![](images/solucion/cpuinicial.PNG)
 ![](images/solucion/cpufinal.PNG)
+![](images/solucion/grafica2Postman3.PNG)
 
+Despues de haber pasado 5 minutos, desde la ultima prueba realizada se obtuvieron los siguientes resultados:
 
 ![](images/solucion/ultimapantalla1.PNG)
 ![](images/solucion/ultimapantalla2.PNG)
@@ -282,6 +318,35 @@ newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALAN
 ![](images/solucion/ultimapantalla5.PNG)
 ![](images/solucion/ultimapantalla6.PNG)
 
+Se adjuntan algunos de los cuadros generados, donde es posible observar que despues de los 5 minutos el tiempo de ejecucion aumento
+
 ![](images/solucion/despues1.PNG)
 ![](images/solucion/despues2.PNG)
 ![](images/solucion/despues3.PNG)
+
+### Conclusiones punto 6:
+
++ El tiempo de respuesta disminuyo de manera considerable y bastante significativamente con la nueva implementacion recursiva con memorizacion
++ El uso de CPU tambien disminuyode manera importante con esta nueva implementacion
++ Al esperar 5 minutos despues de lanzar la ultima prueba, el tiempo de respuesta y el uso de CPU aumentaron, ya que la funcion de almacenamiento se limpia automaticamente por el plan Consumption con el cual se creo la **Azure funcion** que tiene un tiempo limite de 5 minutos
+
+# Control de versiones
+
+por: [Santiago Buitrago](https://github.com/DonSantiagoS) 
+
+Version: 1.0
+Fecha: 20 de Abril 2021
+
+## Autor
+
+* **Santiago Buitrago** - *Laboratorio N°10* - [DonSantiagoS](https://github.com/DonSantiagoS)
+
+See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+
+## Licencia 
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Agradecimientos
+
+* Persistencia en lograr el objetivo
